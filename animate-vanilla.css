@@ -1,0 +1,49 @@
+.animate {
+	/* Base animation setup */
+	transition-property: var(--props, all);
+	transition-duration: var(--duration, 1s);
+	transition-timing-function: var(--ease, ease);
+	transition-delay: var(--delay, 0s);
+
+	/* Properties that can be animated */
+	transform:
+		translate3d(var(--x-from, 0), var(--y-from, 0), var(--z-from, 0)) scale(var(--scale-from, 1)) rotate(var(--rotate-from, 0deg));
+
+	opacity: var(--opacity-from, 1);
+	background-color: var(--bg-from, initial);
+	color: var(--color-from, initial);
+	width: var(--width-from, auto);
+	height: var(--height-from, auto);
+	filter: var(--filter-from, initial);
+}
+.animate.active {
+	transform:
+		translate3d(var(--x-to, var(--x-from, 0)),
+			var(--y-to, var(--y-from, 0)),
+			var(--z-to, var(--z-from, 0))) scale(var(--scale-to, var(--scale-from, 1))) rotate(var(--rotate-to, var(--rotate-from, 0deg)));
+
+	opacity: var(--opacity-to, var(--opacity-from, 1));
+	background-color: var(--bg-to, var(--bg-from, initial));
+	color: var(--color-to, var(--color-from, initial));
+	width: var(--width-to, var(--width-from, auto));
+	height: var(--height-to, var(--height-from, auto));
+	filter: var(--filter-to, initial);
+}
+.ease-power1-out {
+	--ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.ease-power2-out {
+	--ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ease-power3-out {
+	--ease: cubic-bezier(0.33, 1, 0.68, 1);
+}
+.ease-power4-out {
+	--ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ease-back {
+	--ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.ease-elastic {
+	--ease: cubic-bezier(0.7, 0.1, 0.3, 1.5);
+}
