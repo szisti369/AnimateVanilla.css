@@ -15,6 +15,20 @@
 	width: var(--width-from, auto);
 	height: var(--height-from, auto);
 	filter: var(--filter-from, initial);
+
+	/* Timeline properties */
+	animation-timeline: var(--timeline, none);
+	animation-range: var(--range-start, normal) var(--range-end, normal);
+	animation-name: var(--anim-name, none);
+	animation-fill-mode: forwards;
+}
+.animate.animate-timeline-view {
+	--anim-name: animate-vars;
+	--timeline: view();
+}
+.animate.animate-timeline-scroll {
+	--anim-name: animate-vars;
+	--timeline: scroll();
 }
 .animate.active {
 	transform:
@@ -46,4 +60,31 @@
 }
 .ease-elastic {
 	--ease: cubic-bezier(0.7, 0.1, 0.3, 1.5);
+}
+
+@keyframes animate-vars {
+	from {
+		transform: 
+			translate3d(var(--x-from, 0), var(--y-from, 0), var(--z-from, 0)) 
+			scale(var(--scale-from, 1)) 
+			rotate(var(--rotate-from, 0deg));
+		opacity: var(--opacity-from, 1);
+		background-color: var(--bg-from, initial);
+		color: var(--color-from, initial);
+		width: var(--width-from, auto);
+		height: var(--height-from, auto);
+		filter: var(--filter-from, initial);
+	}
+	to {
+		transform: 
+			translate3d(var(--x-to, var(--x-from, 0)), var(--y-to, var(--y-from, 0)), var(--z-to, var(--z-from, 0))) 
+			scale(var(--scale-to, var(--scale-from, 1))) 
+			rotate(var(--rotate-to, var(--rotate-from, 0deg)));
+		opacity: var(--opacity-to, var(--opacity-from, 1));
+		background-color: var(--bg-to, var(--bg-from, initial));
+		color: var(--color-to, var(--color-from, initial));
+		width: var(--width-to, var(--width-from, auto));
+		height: var(--height-to, var(--height-from, auto));
+		filter: var(--filter-to, var(--filter-from, initial));
+	}
 }
