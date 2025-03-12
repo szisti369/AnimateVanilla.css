@@ -4,6 +4,8 @@ A lightweight, variable-based CSS animation system for creating smooth transitio
 
 ## Basic Usage
 
+### Traditional Animations
+
 Add the `.animate` class to any element you want to animate. Then add the `.active` class to trigger the animation.
 
 ```html
@@ -15,6 +17,34 @@ Add the `.animate` class to any element you want to animate. Then add the `.acti
   // Trigger the animation
   document.querySelector('.animate').classList.add('active');
 </script>
+```
+
+### Scroll-Driven Animations
+
+Add the `.animate-timeline-scroll` class to create animations that progress based on scrolling:
+
+```html
+<div class="animate animate-timeline-scroll" style="
+    --opacity-from: 0; 
+    --y-from: 30px;
+    --range-start: entry 10%; 
+    --range-end: entry 50%;">
+  This animates as you scroll
+</div>
+```
+
+### View-Driven Animations
+
+Add the `.animate-timeline-view` class to create animations that trigger when an element enters the viewport:
+
+```html
+<div class="animate animate-timeline-view" style="
+    --opacity-from: 0; 
+    --scale-from: 0.8;
+    --range-start: entry; 
+    --range-end: contain;">
+  This animates when it comes into view
+</div>
 ```
 
 ## Animation Variables
@@ -60,6 +90,13 @@ Add the `.animate` class to any element you want to animate. Then add the `.acti
 | `--filter-from` | Initial CSS filter | `initial` |
 | `--filter-to` | Final CSS filter | Same as `--filter-from` |
 
+### Timeline Animation Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `--range-start` | When animation starts | `normal` |
+| `--range-end` | When animation ends | `normal` |
+
 ## Easing Presets
 
 Add these classes to your element to use predefined easing functions:
@@ -91,6 +128,30 @@ Add these classes to your element to use predefined easing functions:
 </div>
 ```
 
+### Scroll-Triggered Fade In
+
+```html
+<div class="animate animate-timeline-scroll" style="
+    --opacity-from: 0; 
+    --x-from: -30px;
+    --range-start: entry; 
+    --range-end: entry 60%;">
+  This fades in and moves right as you scroll
+</div>
+```
+
+### Enter Viewport Animation
+
+```html
+<div class="animate animate-timeline-view ease-back" style="
+    --scale-from: 0.7; 
+    --opacity-from: 0;
+    --range-start: entry 10%; 
+    --range-end: entry 60%;">
+  This scales up with a bounce when it enters the viewport
+</div>
+```
+
 ### Rotate and Color Change
 
 ```html
@@ -117,6 +178,24 @@ You can create staggered animations by setting different delays:
 <div class="animate ease-power2-out" style="--y-from: 30px; --opacity-from: 0; --delay: 0s;"></div>
 <div class="animate ease-power2-out" style="--y-from: 30px; --opacity-from: 0; --delay: 0.1s;"></div>
 <div class="animate ease-power2-out" style="--y-from: 30px; --opacity-from: 0; --delay: 0.2s;"></div>
+```
+
+### Animation Range Values
+
+For scroll and view animations, you can use these range values:
+
+- Percentages: `0%`, `50%`, `100%` (scroll position)
+- Keywords: `entry` (element enters viewport), `contain` (element fully in viewport), `exit` (element leaves viewport)
+- Combined: `entry 30%` (30% after element starts entering viewport)
+
+```html
+<!-- Animation runs from when element is 20% in view until fully in view -->
+<div class="animate animate-timeline-view" style="
+    --opacity-from: 0; 
+    --range-start: entry 20%; 
+    --range-end: contain;">
+  Fades in as it enters view
+</div>
 ```
 
 ### Reversing Animations
